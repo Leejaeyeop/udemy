@@ -2,4 +2,5 @@
 
 ### typescipt
 
-### next.js
+
+### next.js (react.js)
