@@ -1,7 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import Child from "./Child";
+import "./App.css";
+import { memo, useMemo, useCallback, useState } from "react";
 
 function App() {
+  const [number, setNumber] = useState(0);
+  const [number2, setNumber2] = useState(0);
+
+  const func = useCallback(() => console.log("func!"), [number2]);
+  const memoNumber = useMemo(() => number2 + 10, [number2]);
+
+  console.log("parent!");
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +18,11 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {number}
+
+        <Child func={func} number={memoNumber}></Child>
+        <button onClick={() => setNumber(number + 1)}>click!</button>
+        <button onClick={() => setNumber2(number2 + 1)}>set number 2</button>
       </header>
     </div>
   );
